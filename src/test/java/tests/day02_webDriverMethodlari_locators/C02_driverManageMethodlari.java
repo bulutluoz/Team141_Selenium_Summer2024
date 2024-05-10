@@ -5,6 +5,8 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
+
 public class C02_driverManageMethodlari {
 
     public static void main(String[] args) throws InterruptedException {
@@ -13,13 +15,23 @@ public class C02_driverManageMethodlari {
             Bir web sayfasi ne kadar cok data barindirirsa
             server'dan o datalarin client tarafina yollanmasi o kadar uzun surecektir
 
-            bizim istedigimiz webelementleri bulmamiz da zaman alacaktir
+            bizim istedigimiz webelementlerin sayfaya yuklenmesi zaman alacaktir
+            bu gecikmelerde kodumuzun dinamik olarak beklemesini saglamak icin
+            implicitlyWait tanimlariz
+
+            implicitlyWait icerisine yazdigimiz 10 saniye
+            maximim bekleme suresidir
+            eger 10 sn'den once sayfa yuklenir veya aranan webelement bulunursa
+            kodlar calismaya devam eder
+            10 saniye bekledigimiz halde sayfa acilmaz
+            veya aradigimiz webelement bulunamazsa
+            exception firlatip, calismayi durdurur
          */
 
         System.setProperty("Webdriver.chrome.driver","kurulumDosyalari/chromedriver");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
 
 
