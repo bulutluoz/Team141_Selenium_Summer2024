@@ -1,4 +1,4 @@
-package tests.day02_webDriverMethodlari_locators;
+package tests.day03_webDriverMethodlari_locators;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
