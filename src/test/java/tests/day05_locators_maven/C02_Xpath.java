@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
+import java.util.List;
 
 public class C02_Xpath {
 
@@ -44,18 +45,43 @@ public class C02_Xpath {
         minTutarKutusu.sendKeys("40");
         maxTutarKutusu.clear();
         maxTutarKutusu.sendKeys("200" + Keys.PAGE_DOWN);
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         // deger yolladiktan sonra filtrele butonuna basalim
         driver.findElement(By.xpath("//button[text()='Filter Price']"))
                 .click();
 
         //8-  filtreleme sonucunda urun bulunabildigini test edin
+        List<WebElement> bulunanSonucElementleriList = driver
+                                                        .findElements(By.xpath("//*[@*='product-box mb-2 pb-1']"));
+
+        if (bulunanSonucElementleriList.size()>0){
+            System.out.println("Filtreleme testi PASSED");
+        }else System.out.println("Filtreleme testi FAILED");
 
         //10- Ilk urunu tiklayin
 
+        bulunanSonucElementleriList.get(0)
+                .click();
+
         //11- Urun fiyatinin 40 ile 200 arasinda oldugunu test edin
+
+        WebElement ilkUrunFiyatElementi = driver.findElement(By.xpath("//span[@id='priceproduct']"));
+        // $50.00
+
+        String urunFiyatiStr = ilkUrunFiyatElementi.getText()
+                                    .replaceAll("\\D",""); // 5000
+
+        double urunFiyati = Double.parseDouble(urunFiyatiStr) / 100 ;
+
+        if (urunFiyati>=40 && urunFiyati<=200){
+            System.out.println("Urun fiyat testi PASSED");
+        }else {
+            System.out.println("Urun fiyat testi FAILED");
+        }
 
 
         //12- Sayfayi kapatin
+        Thread.sleep(2000);
+        driver.quit();
     }
 }
