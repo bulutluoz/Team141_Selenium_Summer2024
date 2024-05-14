@@ -67,6 +67,51 @@ public class C03_RelativeLocators {
         }else  System.out.println("DSLR camera testi FAILED");
 
         Thread.sleep(3000);
+
+        // ============================
+        // geriye donup baska bir komsusuyla bir kere daha locate edelim
+        // BatKulakligin altinda diyelim
+
+        driver.get("https://testotomasyonu.com/relativeLocators");
+
+        // relative locator icin 2 bilgiye ihtiyac var
+
+        // A- kullanmak istedigimiz webElementin locate blgisine
+        //    biz tagName = 'img' kullanalim
+
+        // B- etrafinda kullanabilecegimiz bir WebElement
+
+        WebElement batKulaklik = driver.findElement(By.id("pic2_thumb"));
+
+        WebElement dslrCamera2 = driver.findElement(
+                                    RelativeLocator.with(By.tagName("img"))
+                                    .below(batKulaklik)
+                                    );
+
+        dslrCamera2.click();
+
+        /*
+            StaleElementReferenceException
+
+            daha onceden locate edip kullandigimiz bir WebElementi
+            baska sayfalara gittikten sonra yeniden kullanmak istedigimizde olusur
+
+            Selenium bize "tamam o elementi locate etmistin ama
+            o islemden sonra coook sey degisti, senin locate bayatladi" der
+         */
+        urunIsimElementi = driver.findElement(By.xpath("//div[@class=' heading-sm mb-4']"));
+
+        expectedIsim = "DSLR Camera";
+        actualisim = urunIsimElementi.getText();
+
+        if (expectedIsim.equals(actualisim)){
+            System.out.println("DSLR camera testi PASSED");
+        }else  System.out.println("DSLR camera testi FAILED");
+
+
+
+
+        Thread.sleep(3000);
         driver.quit();
     }
 
