@@ -65,7 +65,7 @@ public class C02_Xpath {
 
         //11- Urun fiyatinin 40 ile 200 arasinda oldugunu test edin
 
-        WebElement ilkUrunFiyatElementi = driver.findElement(By.xpath("//span[@id='priceproduct']"));
+        WebElement ilkUrunFiyatElementi = driver.findElement(By.cssSelector("span[id='priceproduct']"));
         // $50.00
 
         String urunFiyatiStr = ilkUrunFiyatElementi.getText()
